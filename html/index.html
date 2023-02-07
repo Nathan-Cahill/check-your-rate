@@ -1,0 +1,78 @@
+<head>
+    <link rel="stylesheet" type="text/css" href="/html/style.css">
+</head>
+  
+<h1>Welcome!</h1>
+<h1>Please enter your details below:</h1>
+<form>
+  <label for="loanAmount">Loan Amount:</label>
+  <input type="number" id="loanAmount" name="loanAmount">
+  <br><br>
+  <label for="loanType">Loan Type:</label>
+  <select id="loanType" name="loanType">
+    <option value="ownerOccupied">Owner Occupied</option>
+    <option value="investment">Investment</option>
+  </select>
+  <br><br>
+  <label for="repaymentType">Repayment Type:</label>
+  <select id="repaymentType" name="repaymentType">
+    <option value="principalAndInterest">Principal and Interest</option>
+    <option value="interestOnly">Interest Only</option>
+  </select>
+  <br><br>
+  <label for="currentInterestRate">Current Interest Rate:</label>
+  <input type="number" id="currentInterestRate" name="currentInterestRate">
+  <br><br>
+  <input type="button" value="Calculate Repayments" onclick="calculateRepayments()">
+  <input type="button" value="Calculate Difference" onclick="calculateDifference()">
+</form>
+
+<div id="differenceResult"></div>
+<div id="repaymentResult"></div>
+<div id="repaymentResult2"></div>
+<div id="repaymentResult3"></div>
+<div id="savingsDiff"></div>
+
+<script>
+   function calculateRepayments() {
+    const loanAmount = document.getElementById("loanAmount").value;
+    const loanType = document.getElementById("loanType").value;
+    const currentInterestRate = document.getElementById("currentInterestRate").value;
+    
+    let referenceRate;
+    if (loanType === "ownerOccupied") {
+      referenceRate = 0.0495;
+    } else {
+      referenceRate = 0.0519;
+    }
+    const years = 30;
+    const months = years * 12;
+    const currentPrincipalAndInterest = ((loanAmount * currentInterestRate) / 12);
+    const referencePrincipalAndInterest = ((loanAmount * referenceRate) / 12) ;
+    const savingsDifference = ((loanAmount * currentInterestRate) / 12) - ((loanAmount * referenceRate) / 12);
+
+    document.getElementById("repaymentResult").innerHTML = `Your monthly repayments based on a 30 year loan term with your current rate of ${currentInterestRate}% is $${currentPrincipalAndInterest.toFixed(2)}.`; 
+    document.getElementById("repaymentResult2").innerHTML = `The monthly repayments based on a 30 year loan term with the reference rate of ${referenceRate}% is $${referencePrincipalAndInterest}.`;
+    document.getElementById("savingsDiff").innerHTML = `This means you will save $${savingsDifference.toFixed(2)} per month.`;
+  }
+
+  function calculateDifference() {
+    const loanAmount = document.getElementById("loanAmount").value;
+    const loanType = document.getElementById("loanType").value;
+    const currentInterestRate = document.getElementById("currentInterestRate").value;
+    let referenceRate;
+    if (loanType === "ownerOccupied") {
+      referenceRate = 4.95;
+    } else {
+      referenceRate = 5.19;
+    }
+    const difference = currentInterestRate - referenceRate;
+    const years = 30;
+    const months = years * 12;
+    const principalAndInterest = (loanAmount * (currentInterestRate / 100)) / months;
+
+    document.getElementById("differenceResult").innerHTML = `The difference between your interest rate and the reference rate is ${difference.toFixed(2)}%.`;
+    document.getElementById("repaymentResult3").innerHTML = `Your monthly repayments based on a 30 year loan term with a rate of ${currentInterestRate}% is $${principalAndInterest.toFixed(2)}.`;
+
+  }
+</script>
