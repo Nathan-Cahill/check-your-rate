@@ -47,7 +47,7 @@
     }
     const years = 30;
     const months = years * 12;
-    const currentPrincipalAndInterest = ((loanAmount * currentInterestRate) / 12);
+    const currentPrincipalAndInterest = (((loanAmount * currentInterestRate) / 12) / 100);
     const referencePrincipalAndInterest = ((loanAmount * referenceRate) / 12) ;
     const savingsDifference = ((loanAmount * currentInterestRate) / 12) - ((loanAmount * referenceRate) / 12);
 
