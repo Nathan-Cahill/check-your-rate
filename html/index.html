@@ -43,11 +43,16 @@
     const currentInterestRate = document.getElementById("currentInterestRate").value;
     
     let referenceRate;
-    if (loanType === "ownerOccupied") {
+    if (loanType === "ownerOccupied" && repaymentType === "principalAndInterest") {
       referenceRate = 4.95;
-    } else  {
-      referenceRate = 5.19;
+    } else if (loanType === "ownerOccupied" && repaymentType === "interestOnly") {
+      referenceRate = 5.50;
     }
+     else if (loanType === "investment" && repaymentType === "principalAndInterest") {
+      referenceRate = 5.19;
+    } else if (loanType === "investment" && repaymentType === "interestOnly") {
+      referenceRate = 5.40;
+    } 
     const years = 30;
     const months = years * 12;
     const currentPrincipalAndInterest = (((loanAmount * (currentInterestRate / 100)) / 12) );
@@ -63,13 +68,19 @@
   function calculateDifference() {
     const loanAmount = document.getElementById("loanAmount").value;
     const loanType = document.getElementById("loanType").value;
+    const repaymentType = document.getElementById("repaymentType").value;
     const currentInterestRate = document.getElementById("currentInterestRate").value;
     let referenceRate;
-    if (loanType === "ownerOccupied") {
+    if (loanType === "ownerOccupied" && repaymentType === "principalAndInterest") {
       referenceRate = 4.95;
-    } else {
-      referenceRate = 5.19;
+    } else if (loanType === "ownerOccupied" && repaymentType === "interestOnly") {
+      referenceRate = 5.50;
     }
+     else if (loanType === "investment" && repaymentType === "principalAndInterest") {
+      referenceRate = 5.19;
+    } else if (loanType === "investment" && repaymentType === "interestOnly") {
+      referenceRate = 5.40;
+    } 
     const difference = currentInterestRate - referenceRate;
     const years = 30;
     const months = years * 12;
